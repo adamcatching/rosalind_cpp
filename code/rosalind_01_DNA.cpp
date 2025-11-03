@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <map>
 #include <string>
 #include <chrono>
@@ -16,12 +17,17 @@ of times that the symbols 'A', 'C', 'G', and 'T' occur in s.
 
 int main() {
 
+    // Read in input file
+
+    ifstream MyFile("../input_files/rosalind_dna.txt");
+
     // Define the string to hold DNA string
     string s;
+    getline(MyFile,s);
 
     // Prompt for DNA input, store in s
-    cout << "DNA string input:" << endl;
-    cin >> s;
+    //cout << "DNA string input:" << endl;
+    //cin >> s;
 
     // Nucleotide to number dictionary
     map<string, int> nuc2num;
@@ -39,8 +45,6 @@ int main() {
     
     // Loop through (iterative CPU command, GPU cuda soon)
     for (int i = 0; i < s.length(); i++) {
-        // Print iterator and that position in string
-        cout << i << ' ' << s[i] << endl;
 
         // Change nucleotide to number for switch
         string nuc = s.substr(i, 1);
