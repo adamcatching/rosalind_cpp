@@ -1,4 +1,6 @@
 #include <iostream>
+#include <map>
+#include <string>
 #include <chrono>
 
 using namespace std;
@@ -21,6 +23,16 @@ int main() {
     cout << "DNA string input:" << endl;
     cin >> s;
 
+    // Nucleotide to number dictionary
+    map<string, int> nuc2num;
+    nuc2num["A"] = 1;
+    nuc2num["C"] = 2;
+    nuc2num["T"] = 3;
+    nuc2num["G"] = 4;
+
+    // Initialize counters
+    int A_counter = 0, C_counter = 0, T_counter = 0, G_counter = 0;
+
     // Create an object of `steady_clock` class and start timer
     chrono::steady_clock sc;   
     auto start = sc.now();
@@ -29,12 +41,32 @@ int main() {
     for (int i = 0; i < s.length(); i++) {
         // Print iterator and that position in string
         cout << i << ' ' << s[i] << endl;
-    }
 
+        // Change nucleotide to number for switch
+        string nuc = s.substr(i, 1);
+        int num_from_nuc = nuc2num[nuc];
+        
+        // Count position
+        switch (num_from_nuc) {
+            case 1:
+                ++A_counter;
+                break;
+            case 2:
+                ++C_counter;
+                break;
+            case 3:
+                ++T_counter;
+                break;
+            case 4:
+                ++G_counter;
+                break;
+        }
+    }
+    cout << A_counter << " " << C_counter << " " << G_counter << " " << T_counter << endl;
     // End timer and print time
     auto end = sc.now();      
     auto time_span = static_cast<chrono::duration<double>>(end - start);   
     cout<<"Operation took: "<<time_span.count()<<" seconds !!!";
-    
+
     return 0;
 }
